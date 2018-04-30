@@ -1,0 +1,2 @@
+NUMPY = 'numpy'
+IMAGE = 'image'

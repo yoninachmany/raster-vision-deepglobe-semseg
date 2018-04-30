@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+if [[ -n "${RASTER_VISION_DEBUG}" ]]; then
+    set -x
+fi
+
+PROJECT_ROOT="$(dirname "$(dirname "$(readlink -f "${0}")")")"
+SRC="$PROJECT_ROOT/src"
+
+function usage() {
+    echo -n \
+         "Usage: $(basename "$0") (--cpu|--gpu)
+Run raster-vision docker image either locally or on an AWS GPU-enabled
+EC2 instance. All arguments except the first are passed to 'docker run'.
+"
+}
+
+if [ "${BASH_SOURCE[0]}" = "${0}" ]
+then
+    if [ "${1:-}" = "--cpu" ]
+    then
+        docker run --rm -it \
+            -e "S3_BUCKET=$S3_BUCKET" \
+            -v "$SRC":/opt/src \
+            -v /opt/data:/opt/data \
+            raster-vision-cpu "${@:2}"
+    elif [ "${1:-}" = "--gpu" ]
+    then
+        sudo docker run --rm -it \
+            -e "S3_BUCKET=$S3_BUCKET" \
+            -v ~/raster-vision/src:/opt/src \
+            -v ~/data:/opt/data \
+            --privileged \
+            -v /var/lib/nvidia-docker/volumes/nvidia_driver/latest:/usr/local/nvidia \
+            279682201306.dkr.ecr.us-east-1.amazonaws.com/raster-vision-gpu:latest "${@:2}"
+    else
+        usage
+    fi
+fi
