@@ -8,12 +8,14 @@ from rastervision.semseg.data.potsdam import (
     POTSDAM, PotsdamImageFileGenerator, PotsdamNumpyFileGenerator)
 from rastervision.semseg.data.vaihingen import (
     VAIHINGEN, VaihingenImageFileGenerator, VaihingenNumpyFileGenerator)
+from rastervision.semseg.data.deepglobe import (
+    DEEPGLOBE, DeepGlobeImageFileGenerator, DeepGlobeNumpyFileGenerator)
 from rastervision.semseg.data.settings import NUMPY, IMAGE
 
 
 class SemsegDataGeneratorFactory(DataGeneratorFactory):
     def __init__(self):
-        super().__init__([POTSDAM, VAIHINGEN], [IMAGE, NUMPY])
+        super().__init__([DEEPGLOBE], [IMAGE, NUMPY])
 
     def get_class(self, dataset_name, generator_name):
         self.validate_keys(dataset_name, generator_name)
@@ -27,6 +29,11 @@ class SemsegDataGeneratorFactory(DataGeneratorFactory):
                 return VaihingenImageFileGenerator
             elif generator_name == NUMPY:
                 return VaihingenNumpyFileGenerator
+        elif dataset_name == DEEPGLOBE:
+            if generator_name == IMAGE:
+                return DeepGlobeImageFileGenerator
+            elif generator_name == NUMPY:
+                return DeepGlobeNumpyFileGenerator
 
     def plot_generator(self, dataset_name, generator_name, split):
         self.validate_keys(dataset_name, generator_name, split)
@@ -37,7 +44,7 @@ class SemsegDataGeneratorFactory(DataGeneratorFactory):
             def __init__(self):
                 self.dataset_name = dataset_name
                 self.generator_name = generator_name
-                self.active_input_inds = [0, 1, 2, 3]
+                self.active_input_inds = [0, 1, 2]
                 if dataset_name == POTSDAM:
                     self.active_input_inds = [0, 1, 2, 3, 4]
                 self.train_ratio = 0.8
