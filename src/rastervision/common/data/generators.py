@@ -96,7 +96,7 @@ class FileGenerator(Generator):
         else:
             self.channel_stats = self.compute_channel_stats(100, False)
 
-    def compute_split_probs(self):
+    def compute_split_probs(self, split):
         return None
 
     def calibrate_image(self, normalized_image):
@@ -318,7 +318,6 @@ class FileGenerator(Generator):
             # the x.
             img_batch, batch_file_inds = x
             img_batch = img_batch.astype(np.float32)
-
             if augment_methods:
                 img_batch = self.augment_img_batch(img_batch, augment_methods)
 
@@ -328,6 +327,7 @@ class FileGenerator(Generator):
 
             if normalize:
                 batch.all_x = self.normalize(batch.all_x)
+
             batch.x = batch.all_x[:, :, :, self.active_input_inds]
 
             if only_xy:
