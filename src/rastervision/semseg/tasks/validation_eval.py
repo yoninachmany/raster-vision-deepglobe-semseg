@@ -127,7 +127,6 @@ def validation_eval(run_path, model, options, generator):
         label_y = dataset.one_hot_to_label_batch(y)
         label_pred = dataset.rgb_to_label_batch(display_pred)
 
-        y_mask = np.ones((2000, 2000, 1))
         confusion_mat += compute_confusion_mat(
             label_y, y_mask, label_pred, dataset.nb_labels)
 
