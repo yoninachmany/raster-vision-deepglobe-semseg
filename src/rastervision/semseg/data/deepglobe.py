@@ -19,7 +19,7 @@ from rastervision.common.utils import (
     expand_dims, compute_ndvi, plot_img_row, download_dataset)
 from rastervision.common.data.generators import Batch, FileGenerator
 
-DEEPGLOBE = 'deepglobe/land-train'
+DEEPGLOBE = 'deepglobe'
 PROCESSED_DEEPGLOBE = 'processed_deepglobe/'
 
 
