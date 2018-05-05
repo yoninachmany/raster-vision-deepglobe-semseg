@@ -19,8 +19,8 @@ from rastervision.common.utils import (
     expand_dims, compute_ndvi, plot_img_row, download_dataset)
 from rastervision.common.data.generators import Batch, FileGenerator
 
-DEEPGLOBE = 'deepglobe'
-PROCESSED_DEEPGLOBE = 'processed_deepglobe'
+DEEPGLOBE = 'deepglobe/land-train'
+PROCESSED_DEEPGLOBE = 'processed_deepglobe/'
 
 
 class DeepGlobeBatch(Batch):
@@ -351,6 +351,6 @@ class DeepGlobeNumpyFileGenerator(DeepGlobeFileGenerator):
 
         if self.has_y(file_inds[0]):
             batch.y = self.dataset.label_to_one_hot_batch(
-                img_batch[:, :, :, 4:5])
-            batch.y_mask = img_batch[:, :, :, 5:6]
+                img_batch[:, :, :, 3:4])
+            batch.y_mask = img_batch[:, :, :, 4:5]
         return batch
