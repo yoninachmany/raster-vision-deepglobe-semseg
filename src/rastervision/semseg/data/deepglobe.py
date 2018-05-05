@@ -51,12 +51,13 @@ class DeepGlobeDataset():
         # Barren (RGB: 255, 255, 255) - Mountain, land, rock, dessert, beach, no vegetation
         # Unknown (RGB: 0, 0, 0) - Clouds and others
         self.label_keys = [
-            [255, 255, 255],
-            [0, 0, 255],
             [0, 255, 255],
-            [0, 255, 0],
             [255, 255, 0],
-            [255, 0, 0],
+            [255, 0, 255],
+            [0, 255, 0],
+            [0, 0, 255],
+            [255, 255, 255],
+            [0, 0, 0],
         ]
 
         self.nb_labels = len(self.label_keys)
