@@ -3,7 +3,7 @@ from shutil import rmtree
 
 import numpy as np
 
-from rastervision.common.utils import _makedirs, save_img, zip_dir
+from rastervision.common.utils import _makedirs, save_img, zip_dir, save_numpy_array
 from rastervision.common.settings import VALIDATION, TEST
 
 from rastervision.semseg.tasks.utils import make_prediction_img, predict_x
@@ -52,7 +52,7 @@ def predict(run_path, model, options, generator, split, save_probs=False):
             probs_file_path = join(
                 probs_path,
                 generator.dataset.get_output_file_name(file_ind))
-            save_img(y_probs, probs_file_path)
+            save_numpy_array(probs_file_path, y_probs)
 
         y_preds = dataset.one_hot_to_rgb_batch(y_probs)
         prediction_file_path = join(

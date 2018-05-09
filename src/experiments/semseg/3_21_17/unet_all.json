@@ -2,15 +2,19 @@
     "batch_size": 8,
     "patience": 10,
     "git_commit": "e6a7bf",
-    "dataset_name": "potsdam",
+    "dataset_name": "deepglobe",
     "train_ratio": 0.8,
     "generator_name": "numpy",
     "include_depth": true,
     "include_ir": true,
     "include_ndvi": true,
     "model_type": "unet",
-    "nb_epoch": 100,
+    "epochs": 100,
     "nb_val_samples": 512,
     "run_name": "3_21_17/unet_all",
-    "samples_per_epoch": 4096
+    "samples_per_epoch": 4096,
+    "problem_type": "semseg",
+    "steps_per_epoch": 8,
+    "validation_steps": 2,
+    "active_input_inds": [0, 1, 2]
 }

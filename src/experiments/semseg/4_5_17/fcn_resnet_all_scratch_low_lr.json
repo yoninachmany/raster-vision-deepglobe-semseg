@@ -1,12 +1,12 @@
 {
     "batch_size": 8,
     "git_commit": "c96f87",
-    "dataset_name": "potsdam",
+    "dataset_name": "deepglobe",
     "generator_name": "numpy",
-    "active_input_inds": [0, 1, 2, 3, 4, 5],
+    "active_input_inds": [0, 1, 2],
     "use_pretraining": false,
     "freeze_base": false,
-    "nb_epoch": 150,
+    "epochs": 150,
     "init_lr": 1e-5,
     "optimizer": "adam",
     "target_size": [256, 256],
@@ -15,5 +15,8 @@
     "train_ratio": 0.8,
     "nb_val_samples": 512,
     "run_name": "4_5_17/fcn_resnet_all_scratch_low_lr",
-    "samples_per_epoch": 4096
+    "samples_per_epoch": 4096,
+    "problem_type": "semseg",
+    "steps_per_epoch": 8,
+    "validation_steps": 2
 }
